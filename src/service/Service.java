@@ -1,32 +1,44 @@
 package service;
 
 import domain.Event;
-import repository.Repository;
+import repository.IRepository;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-/**
- * Created by User on 11.05.2018.
- */
 public class Service {
-    private Repository repo;
+    private IRepository repo;
 
-    public Service(Repository r)
-    {
-        this.repo = r;
+    public Service(IRepository repo) {
+        this.repo = repo;
     }
 
-    public void adaugaEveniment(String title, String location, Date date, int nrOfPeople, String link) throws Exception
-    {
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        Event e = new Event(title, location, date, nrOfPeople, link);
-        this.repo.adaugaEveniment(e);
-    }
-
-    public ArrayList<Event> getAll()
-    {
+    public List<Event> getAll() {
         return this.repo.getAll();
+    }
+
+    public void adaugaEveniment(String titlu, String locatia, String data, int nrOameni, String link) throws Exception {
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        Event e = new Event(titlu, locatia, f.parse(data), nrOameni, link);
+        this.repo.addEveniment(e);
+
+    }
+
+    public void stergeEveniment(String titlu, String locatia, String data, int nrOameni, String link) throws Exception {
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        Event e = new Event(titlu, locatia, f.parse(data), nrOameni, link);
+        repo.deleteEveniment(e);
+    }
+
+    public List<Event> sorteazaDupaLocatie(String locatia) {
+        List<Event> ev = repo.getAll();
+        Collections.sort(ev, (o1, o2) -> o1.getLocation().compareToIgnoreCase(o2.getLocation()));
+        return ev;
+    }
+
+    public List<Event> sorteazaDupaLuna (){
+        return null;
     }
 }

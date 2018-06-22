@@ -3,9 +3,6 @@ package domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by User on 11.05.2018.
- */
 public class Event {
     private String title;
     private String location;
@@ -54,21 +51,20 @@ public class Event {
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        Event e = (Event) obj;
-        if (e.getDate().equals(this.getDate()) && e.getLocation().equals(this.getLocation()))
-            return true;
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+
+        Event event = (Event) o;
+
+        if (!getLocation().equals(event.getLocation())) return false;
+        return getDate().equals(event.getDate());
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((location == null) ? 0 : location.hashCode());
+        int result = getLocation().hashCode();
+        result = 31 * result + getDate().hashCode();
         return result;
     }
-
 }
