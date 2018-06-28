@@ -1,11 +1,10 @@
 //package ui;
 //
-//import domain.*;
-//import service.ServiceEv;
+//import domain.Participare;
+//import service.ServiceGeneral;
 //
 //import javax.swing.*;
 //import java.awt.*;
-//import java.awt.Event;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 //
@@ -13,14 +12,14 @@
 ////border layut pt lista si in partea de jos o alta componenta in sud. Aceasta sa aibe tot un layout border,
 //// si in//sud butonul . Grid layout pentru casutele de input
 //public class GUI extends JFrame {
-//    private ServiceEv service;
-//    private JList listaEvenimente = new JList();
+//    private ServiceGeneral service;
+//    private JList afisareEvenimente = new JList();
 //
 //    //declaram ceea ce inta in ComponentaMare
 //    private JButton butonAdauga = new JButton("Adauga");
 //    private JButton butonSterge = new JButton("Sterge");
 //
-//    // private JTextField textID = new JTextField();
+//    private JTextField textID = new JTextField();
 //    private JTextField textTitlu = new JTextField();
 //    private JTextField textLocatie = new JTextField();
 //    private JTextField textData = new JTextField();
@@ -28,7 +27,7 @@
 //    private JTextField textLink = new JTextField();
 //
 //    //constructor
-//    public GUI(ServiceEv service) {
+//    public GUI(ServiceGeneral service) {
 //        this.service = service;
 //        this.initializareGUI();
 //        this.populeazaLista();
@@ -41,7 +40,7 @@
 //        this.setLayout(new BorderLayout());
 //        //daca nu pun size apare doar o fereastra micuta.
 //        this.setSize(new Dimension(400, 400));
-//        this.add(this.listaEvenimente, BorderLayout.CENTER);
+//        this.add(this.afisareEvenimente, BorderLayout.CENTER);
 //
 //        //pentru o componenta noua se foloseste jpanel
 //        JPanel componentaMare = new JPanel();
@@ -57,7 +56,7 @@
 //
 //
 //        //creare de labeluri
-//        // JLabel idLabel = new JLabel("ID");
+//        JLabel idLabel = new JLabel("ID");
 //        JLabel tituluLabel = new JLabel("Titlu");
 //        JLabel locatieLabel = new JLabel("Locatie");
 //        JLabel dataLabel = new JLabel("DAta");
@@ -65,8 +64,8 @@
 //        JLabel linkLabel = new JLabel("Link");
 //
 //        //adaug labeluri la comp cu tetxt field
-//        // componentaTextFields.add(idLabel);
-//        // componentaTextFields.add(this.textID);
+//        componentaTextFields.add(idLabel);
+//        componentaTextFields.add(this.textID);
 //        componentaTextFields.add(tituluLabel);
 //        componentaTextFields.add(this.textTitlu);
 //        componentaTextFields.add(locatieLabel);
@@ -88,9 +87,9 @@
 //
 //    public void populeazaLista() {
 //        DefaultListModel<String> listModel = new DefaultListModel<>();
-//        for (domain.Event e : this.service.getAll()) {
+//        for (Participare e : this.service.getAll()) {
 //            listModel.addElement(e.toString());
-//            this.listaEvenimente.setModel(listModel);
+//            this.afisareEvenimente.setModel(listModel);
 //        }
 //    }
 //
@@ -101,15 +100,15 @@
 //        this.butonAdauga.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
-//                //    int id = Integer.parseInt(textID.getText());
+//                int id = Integer.parseInt(textID.getText());
 //                String titlu = textTitlu.getText();
 //                String locatie = textTitlu.getText();
-//               int zi = textData.getText();
+//                String data = textData.getText();
 //                int nrPers = Integer.parseInt(textNrPersoane.getText());
 //                String link = textLink.getText();
 //
 //                try {
-//                    service.adaugaEveniment(titlu, locatie, zi, luna, an, nrPers, link);
+//                    service.adaugaEveniment(id, titlu, locatie, data, nrPers, link);
 //                } catch (Exception ie) {
 //                    ie.printStackTrace();
 //                }
@@ -125,12 +124,5 @@
 //            }
 //        });
 //    }
-//  //   public void removeHandler(){
-//   //     this.butonSterge.addActionListener(new ActionListener() {
-//    //        @Override
-//    //        public void actionPerformed(ActionEvent e) {
-////
-//    //        }
-//    //    });
-//    // }
+//
 //}

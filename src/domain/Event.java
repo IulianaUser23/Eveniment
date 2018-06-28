@@ -32,7 +32,7 @@ public class Event extends Entitate {
         return link;
     }
 
-    public Event(String title, String location, Date date, int nrPeople, String link){
+    public Event(int id, String title, String location, Date date, int nrPeople, String link){
         this.title=title;
         this.location = location;
         this.date = date;
@@ -53,7 +53,8 @@ public class Event extends Entitate {
                 '}';
     }
 
-    //validare pentru a nu putea adauga un eveniment de doua ori
+    //a nu adauga de 2 ori
+
     @Override
     public boolean equals(Object obj) {
         Event e = (domain.Event) obj;

@@ -1,5 +1,6 @@
 //package repository;
 //
+//import domain.Entitate;
 //import domain.Event;
 //
 //import java.util.ArrayList;
@@ -28,10 +29,30 @@
 //     *Output: pozitia pe care se afla e, daca e este gasit sau -1 daca e nu este gasit in lista
 //     */
 //    public Event findEveniment (String location, Date date){
-//        Event e = new Event("", location, date, 0, "");
+//        Event e = new Event(0," ", location, date, 0, "");
 //        for(int i=0; i < this.evenimente.size(); i++)
 //            if (this.evenimente.get(i).equals(e))
 //                return this.evenimente.get(i);
+//        return null;
+//    }
+//
+//    @Override
+//    public void adauga(Entitate elem) throws Exception {
+//
+//    }
+//
+//    @Override
+//    public Entitate findId(int id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Entitate sterge(Entitate elem) throws Exception {
+//        return null;
+//    }
+//
+//    @Override
+//    public Entitate update(Entitate elem) throws Exception {
 //        return null;
 //    }
 //
@@ -41,7 +62,7 @@
 //
 //
 //    public void deleteEveniment(String locatie, Date data) throws Exception {
-//        Event eveniment = new Event("",locatie,data,0,"");
+//        Event eveniment = new Event(0,"",locatie,data,0,"");
 //        if (findEveniment(locatie,data)!= null){
 //            this.getAll().remove((eveniment));
 //        }else

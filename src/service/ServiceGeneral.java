@@ -34,7 +34,7 @@ public class ServiceGeneral {
     //~Operatii EVENIMENT~
 
     public void adaugaEveniment(int id, String titlu, String locatie, String data, int nrPers, String link) throws Exception {
-        this.serviceEvenimente.addEveniment(id, titlu, locatie, data, nrPers, link);
+        this.serviceEvenimente.adaugareEveniment(id, titlu, locatie, data, nrPers, link);
     }
 
     public void stergeEveniment(int id) throws Exception {
@@ -42,7 +42,7 @@ public class ServiceGeneral {
 
         Event e = this.serviceEvenimente.stergeEveniment(id);
 
-        Action a = new ActionRemoveCascade<>(e, participari, this.serviceEvenimente.getRepository(), this.serviceParticipare.getRepo());
+        Action a = new ActionDeleteCascade<>(e, participari, this.serviceEvenimente.getRepository(), this.serviceParticipare.getRepo());
 
         this.undoActions.add(a);
         this.undoActions.add(a);
@@ -94,7 +94,7 @@ public class ServiceGeneral {
     public void stergePersoana(int id) throws Exception {
         List<Participare> participari = this.serviceParticipare.stergeDupaPersoana(id);
         Persoana p = this.servicePersoana.stergePersoana(id);
-        Action a = new ActionRemoveCascade<>(p, participari, this.servicePersoana.getRepo(), this.serviceParticipare.getRepo());
+        Action a = new ActionDeleteCascade<>(p, participari, this.servicePersoana.getRepo(), this.serviceParticipare.getRepo());
 
         this.undoActions.add(a);
         this.undoActions.add(a);
