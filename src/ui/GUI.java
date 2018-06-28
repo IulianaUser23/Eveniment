@@ -1,7 +1,7 @@
 //package ui;
 //
 //import domain.*;
-//import service.Service;
+//import service.ServiceEv;
 //
 //import javax.swing.*;
 //import java.awt.*;
@@ -13,7 +13,7 @@
 ////border layut pt lista si in partea de jos o alta componenta in sud. Aceasta sa aibe tot un layout border,
 //// si in//sud butonul . Grid layout pentru casutele de input
 //public class GUI extends JFrame {
-//    private Service service;
+//    private ServiceEv service;
 //    private JList listaEvenimente = new JList();
 //
 //    //declaram ceea ce inta in ComponentaMare
@@ -28,7 +28,7 @@
 //    private JTextField textLink = new JTextField();
 //
 //    //constructor
-//    public GUI(Service service) {
+//    public GUI(ServiceEv service) {
 //        this.service = service;
 //        this.initializareGUI();
 //        this.populeazaLista();

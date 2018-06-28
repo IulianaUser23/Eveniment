@@ -9,23 +9,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Service {
+public class ServiceEv {
     private Repository1 repo;
     private Repository2 rep;
     private IRepository irepo;
-    private ArrayList<iAction>undoActions=new ArrayList<>();
-    private ArrayList<iAction>redoActions = new ArrayList<>();
+    private ArrayList<Action>undoActions=new ArrayList<>();
+    private ArrayList<Action>redoActions = new ArrayList<>();
 
 
 
     //Constructor pentru service care primeste un repository
-    public Service(Repository1 r1){
+    public ServiceEv(Repository1 r1){
         this.repo = r1;
     }
-    public Service(Repository2 repository2){
+    public ServiceEv(Repository2 repository2){
         this.rep = repository2;
     }
-    public Service(IRepository repository){
+    public ServiceEv(IRepository repository){
         this.irepo = repository;
     }
 
@@ -36,7 +36,7 @@ public class Service {
         this.irepo.addEveniment(ev);
 
         //retinem ce actiune s-a facut ca sa ii putem face inversul
-        iAction a = new aAdd(ev,irepo);
+        Action a = new ActionAdd(ev,irepo);
         this.undoActions.add(a);
 
     }
@@ -53,7 +53,7 @@ public class Service {
 
         int size = this.undoActions.size();
         //luam actiunea de pe ultima pozitie
-        iAction a = this.undoActions.get(size - 1);
+        Action a = this.undoActions.get(size - 1);
         //executam undo pe obiectul aciune a
         a.executeUndo();
         //eliminam din lista de actiuni, actiunea pt care s-a facut undo
@@ -66,7 +66,7 @@ public class Service {
             throw new Exception("Nu se mai poate face redo!");
         }
         int size = this.redoActions.size();
-        iAction a = this.redoActions.get(size - 1);
+        Action a = this.redoActions.get(size - 1);
         a.executeDo();
         this.undoActions.add(a);
         this.redoActions.remove(size - 1);
@@ -78,7 +78,7 @@ public class Service {
         Event ev = this.irepo.findEveniment(location,dt.parse(date));
         irepo.deleteEveniment(location, dt.parse(date));
 
-        iAction a = new aRemove(ev, irepo);
+        Action a = new ActionDelete<>(ev, irepo);
         this.undoActions.add(a);
     }
 

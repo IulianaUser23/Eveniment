@@ -4,8 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class Event {
-
+public class Event extends Entitate {
 
     private String title;
     private String location;
