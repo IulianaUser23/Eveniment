@@ -2,8 +2,12 @@ package repository;
 
 import domain.Event;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.*;
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,68 +17,99 @@ public class Repository2 implements IRepository {
 
     private Map<String, Event> evenimente = new HashMap<>();
     private String filename;
+    private DateFormat d = new SimpleDateFormat("MM/dd/yy");
 
-    public Repository2(String filename) {
+    public Repository2 (String filename){
         this.filename = filename;
-        load();
+    }
+    private String getKey(String locatie, Date date){
+        return locatie + "_" + date;
     }
 
-    private void load() {
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-
+    private void loadFile(){
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))){
             String line;
-            // citeste cate o linie cat timp are ce sa citeasca
-            while ((line = br.readLine()) != null) {
-                String[] componente = line.split(",");
-                Event eveniment = new Event(componente[0], componente[1], Date.valueOf(componente[2]),
-                        Integer.parseInt(componente[3]), componente[4]);
-                evenimente.put(eveniment.getTitle(), eveniment);
+            while ((line = br.readLine()) != null){
+                String[] params = line.split(",");
+                String titlu = params[0];
+                String locatie = params[1];
+                Date date = d.parse(params[2]);
+                int nrPersoane = Integer.parseInt(params[3]);
+                String link = params[4];
+
+                Event ev = new Event(titlu,locatie, date, nrPersoane, link);
+                String keyMap = getKey(locatie, date);
+
+                evenimente.put(keyMap, ev);
             }
         } catch (IOException ioe) {
+            System.out.println("IO Exception: " + filename);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
-    public void save() {
+    private void saveToFile() {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(filename))) {
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            for (Event eveniment : evenimente.values()) {
-                bw.write(eveniment.getTitle() + "," + eveniment.getLocation() + "," + eveniment.getDate() + "," +
-                        eveniment.getNrOfPeople() + "," + eveniment.getLink());
-                bw.write(System.lineSeparator());
+            for (Event ev : evenimente.values()) {
+                w.write(String.format("%s,%s,%tD,%d,%s\n",
+                        ev.getTitle(),
+                        ev.getLocation(),
+                        ev.getDate(),
+                        ev.getNrPeople(),
+                        ev.getLink()));
             }
+
         } catch (IOException ioe) {
-
+            System.out.println("IO Exception: " + filename);
         }
     }
+//    public domain.Eveniment find(String locatie, Date date) {
+//
+//        String keyMap = getKey(locatie, date);
+//        return evenimente.get(keyMap);
+//    }
 
-    public List<Event> getAll() {
-        return new ArrayList<>(evenimente.values());
+    public Event findEveniment(String location, Date date) {
+
+        String keyMap = location+ "" + date.toString();
+        return evenimente.get(keyMap);
+    }
+    @Override
+    public void addEveniment(Event ev) throws Exception {
+        loadFile();
+        String keyMap = ev.getLocation()+ "" +ev.getDate().toString();
+        if (this.findEveniment(ev.getLocation(), ev.getDate()) == null) {
+            this.evenimente.put(keyMap, ev);
+        } else
+            throw new Exception("Exista deja un eveniment cu aceasta locatie si data!");
     }
 
-    private String getKey(String locatie, java.util.Date data) {
-        return locatie + "," + data;
-    }
 
-    public Event findEveniment(String locatie, java.util.Date data) {
-        String mapKey = getKey(locatie, data);
-        return evenimente.get(mapKey);
-    }
+//    public domain.Eveniment find (domain.Eveniment e){
+//        for(int i=0; i < this.evenimente.size(); i++)
+//            if (this.evenimente.get(i).equals(e))
+//                return e;
+//        return null;
+//    }
 
-    public void addEveniment(Event ev) {
-        if (findEveniment(ev.getLocation(), ev.getDate()) != null) {
-            throw new IllegalArgumentException("Acest eveniment deja exista.");
+    public ArrayList<Event> getAll() {
+
+        loadFile();
+        ArrayList<Event> evenimentList = new ArrayList<>();
+        for (Event ev : evenimente.values()) {
+            evenimentList.add(ev);
         }
-        String key = getKey(ev.getLocation(), ev.getDate());
-        evenimente.put(key, ev);
-        save();
+
+        return evenimentList;
     }
 
-    public void deleteEveniment(Event ev) {
-        if (findEveniment(ev.getLocation(), ev.getDate()) == null ){
-            throw new IllegalArgumentException("Acest eveniment nu exista.");
-        }String key = getKey(ev.getLocation(), ev.getDate());
-        evenimente.remove(key, ev);
-        save();
+    public void deleteEveniment(String locatie, Date data) throws Exception {
+        Event eveniment = new Event("",locatie,data,0,"");
+        if (findEveniment(locatie,data) != null){
+            this.evenimente.remove(eveniment);
+        }else
+            throw new Exception();
     }
 }

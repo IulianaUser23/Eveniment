@@ -8,7 +8,7 @@ import java.util.List;
 public interface IRepository {
 
     List<Event> getAll();
-    Event findEveniment(String locatie, Date data);
+    Event findEveniment(String location, Date date);
     void addEveniment(Event ev) throws Exception;
-    void deleteEveniment(Event ev);
+    void deleteEveniment(String location, Date date) throws Exception;
 }

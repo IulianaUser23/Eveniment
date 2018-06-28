@@ -1,0 +1,30 @@
+package service;
+
+import domain.Event;
+import repository.IRepository;
+
+/**
+ * Created by User on 28.06.2018.
+ */
+public class aDelete implements iAction {
+    private Event ev;
+    private IRepository repository;
+
+
+    public aDelete (Event ev, IRepository repository){
+        this.ev = ev;
+        this.repository = repository;
+
+    }
+
+    @Override
+    public void executeDo() throws Exception {
+        this.repository.deleteEveniment(ev.getLocation(),ev.getDate());
+    }
+
+    @Override
+    public void executeUndo() throws Exception {
+        this.repository.addEveniment(this.ev);
+
+    }
+}

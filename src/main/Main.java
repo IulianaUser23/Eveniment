@@ -2,12 +2,8 @@ package main;
 
 import repository.IRepository;
 import repository.Repository1;
-import repository.Repository2;
 import service.Service;
-import ui.GUI;
 import ui.UI;
-
-import javax.swing.*;
 /*
 Implementați o aplicație software care să vă ajute să va gestionați viața după serviciu/cursuri și să fiți
 mereu informați despre evenimentele interesante din orașul dumneavoastră. Aplicația va memora toate
@@ -25,20 +21,18 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-
-       // IRepository repo = new Repository2("file.csv");
         IRepository repo = new Repository1();
+        //        repository.Repository1 repository1 = new repository.Repository1();
         Service service = new Service(repo);
-
-
-        service.adaugaEveniment( "Joaca", "Cluj", "10/05/2018", 0, "www.joaca.ro");
-        service.adaugaEveniment( "Concert", "Braila", "05/12/2018", 0, "www.concert.ro");
-
-     //   UI ui = new UI(service);
-     //   ui.run();
-     //pentru a stiliza putin fereastra
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        GUI gui = new GUI(service);
-        gui.initializareGUI();
+        //        repository.Repository2 repository2 =new repository.Repository2("evenimente.txt");
+        //        service.Service service = new service.Service(repository2);
+        service.adaugaEveniment("Circ","Cluj","05/06/18",150,"https://www.circus.ro");
+        service.adaugaEveniment("Teatru","Cluj","06/19/18",200,"www.teatrucluj.ro");
+        service.adaugaEveniment("Opera", "Cluj","07/20/18",100,"www.operacluj.ro");
+        service.adaugaEveniment("ConcertAerLiber","PiataUnirii","06/15/18",300,"www.clujevents.ro");
+        service.adaugaEveniment("ZileleClujului","PiataUnirii","05/17/18",600,"www.clujlife.ro");
+        service.adaugaEveniment("Untold","ParculCentral","08/03/18",30000,"www.untold.ro");
+        UI ui = new UI(service);
+        ui.run();
     }
 }
