@@ -30,15 +30,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         GenericRepo<Event> repoEveniment = new GenericRepo<>();
-
         GenericRepo<Participare> repoParticipari = new GenericRepo<>();
-
         GenericRepo<Persoana> repoPersoana = new GenericRepo<>();
 
         ServiceEv serviceEvenimente = new ServiceEv(repoEveniment);
-
         ServiceParticipare serviceParticipare = new ServiceParticipare(repoParticipari);
-
         ServicePers servicePersoana = new ServicePers(repoPersoana);
 
         ServiceGeneral serviceGeneral = new ServiceGeneral(serviceEvenimente, servicePersoana, serviceParticipare);
@@ -47,19 +43,15 @@ public class Main {
         //GUI gui = new GUI(serviceGeneral);
 
         try {
-            serviceGeneral.adaugaEveniment(1, "Circ", "Cluj", "05/06/18", 150, "https://www.circus.ro");
-            serviceGeneral.adaugaEveniment(2, "Teatru", "Cluj", "06/19/18", 200, "www.teatrucluj.ro");
-            serviceGeneral.adaugaEveniment(3, "Opera", "Cluj", "07/20/18", 100, "www.operacluj.ro");
-
+            serviceGeneral.adaugaEveniment(1, "Circ", "Cluj", "05/06/18", 150, "111");
+            serviceGeneral.adaugaEveniment(2, "Teatru", "Brasov", "05/05/18", 20, "www1");
 
             serviceGeneral.adaugaPersoana(1, "A", "C1", 45);
-            serviceGeneral.adaugaPersoana(2, "B", "C2", 34);
-            serviceGeneral.adaugaPersoana(3, "C", "C3", 32);
+            serviceGeneral.adaugaPersoana(2, "B", "C2", 15);
 
+            serviceGeneral.adaugaParticipare(10, 2, 1);
+            serviceGeneral.adaugaParticipare(4, 1, 1);
 
-            serviceGeneral.adaugaParticipare(10, 5, 5);
-            serviceGeneral.adaugaParticipare(11, 1, 5);
-            serviceGeneral.adaugaParticipare(12, 1, 6);
 
         } catch (Exception e) {
             System.out.println("Eroare la adaugare");
@@ -74,8 +66,6 @@ public class Main {
 //        serviceGen.adaugaEveniment(2,"Teatru","Cluj","06/19/18",200,"www.teatrucluj.ro");
 //        serviceGen.adaugaEveniment(3,"Opera", "Cluj","07/20/18",100,"www.operacluj.ro");
 //
-
-
 //    }
     }
 }

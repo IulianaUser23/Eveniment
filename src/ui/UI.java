@@ -18,22 +18,21 @@ public class UI {
     }
 
     public void printMenu() {
-        System.out.println("1.Adaugare Eveniment.");
-        System.out.println("2.Afisare Evenimente.");
+        System.out.println("1.Adauga Eveniment.");
+        System.out.println("2.Afiseaza Lista de evenimente.");
         System.out.println("3.Sterge Eveniment");
         System.out.println("4.Sorteaza Eveniment");
-        System.out.println("5.Update Eveniment");
-        System.out.println("6.Adaugare Persoana");
-        System.out.println("7.Afisare Persoane");
+        System.out.println("5.Actualizeaza Eveniment");
+        System.out.println("6.Adauga Persoana");
+        System.out.println("7.Afiseaza Persoane");
         System.out.println("8.Sterge Persoana");
-        System.out.println("9.Adaugare Participare");
-        System.out.println("10.Afisare Participare");
+        System.out.println("9.Adauga Participare");
+        System.out.println("10.Afiseaza Participare");
         System.out.println("11.Sterge Participare");
-        System.out.println("12. Undo");
-        System.out.println("13. Redo");
-        System.out.println("14.Afisare Persoane la eveniment");
-        System.out.println("15.Afisare evenimentele la care participa o persoana");
-
+        System.out.println("12.Undo");
+        System.out.println("13.Redo");
+        System.out.println("14.Afiseaza Persoane la eveniment");
+        System.out.println("15.Afiseaza evenimentele la care participa o persoana");
         System.out.println("0.Exit");
     }
 

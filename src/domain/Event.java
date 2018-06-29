@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Event extends Entitate {
-
     private String title;
     private String location;
     private Date date;
@@ -33,6 +32,7 @@ public class Event extends Entitate {
     }
 
     public Event(int id, String title, String location, Date date, int nrPeople, String link){
+        super(id);
         this.title=title;
         this.location = location;
         this.date = date;

@@ -87,7 +87,7 @@
 //
 //    public void populeazaLista() {
 //        DefaultListModel<String> listModel = new DefaultListModel<>();
-//        for (Participare e : this.service.getAll()) {
+//        for (Participare e : this.service.getAllEvenimente()) {
 //            listModel.addElement(e.toString());
 //            this.afisareEvenimente.setModel(listModel);
 //        }

@@ -8,6 +8,7 @@ import repository.GenericRepo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,10 +32,10 @@ public class ServiceGeneral {
         this.redoActions = new ArrayList<>();
     }
 
-    //~Operatii EVENIMENT~
+    // EVENIMENT~
 
     public void adaugaEveniment(int id, String titlu, String locatie, String data, int nrPers, String link) throws Exception {
-        this.serviceEvenimente.adaugareEveniment(id, titlu, locatie, data, nrPers, link);
+                this.serviceEvenimente.adaugareEveniment(id, titlu, locatie, data, nrPers, link);
     }
 
     public void stergeEveniment(int id) throws Exception {
@@ -42,10 +43,7 @@ public class ServiceGeneral {
 
         Event e = this.serviceEvenimente.stergeEveniment(id);
 
-        Action a = new ActionDeleteCascade<>(e, participari, this.serviceEvenimente.getRepository(), this.serviceParticipare.getRepo());
 
-        this.undoActions.add(a);
-        this.undoActions.add(a);
     }
 
     public void updateEveniment(int id, String titlu, String locatia, String data, int nrPers, String link) throws Exception {
@@ -94,10 +92,7 @@ public class ServiceGeneral {
     public void stergePersoana(int id) throws Exception {
         List<Participare> participari = this.serviceParticipare.stergeDupaPersoana(id);
         Persoana p = this.servicePersoana.stergePersoana(id);
-        Action a = new ActionDeleteCascade<>(p, participari, this.servicePersoana.getRepo(), this.serviceParticipare.getRepo());
 
-        this.undoActions.add(a);
-        this.undoActions.add(a);
     }
 
     public ArrayList<Persoana> getAllPersoane() {
@@ -147,7 +142,7 @@ public class ServiceGeneral {
 //1.Pentru un eveniment dat, să se afișeze toate persoanele care participă
     public ArrayList<Persoana> PersLaEveniment(int idEv) throws Exception {
         SimpleDateFormat f = new SimpleDateFormat("MM/dd/yy");
-        Event e = new Event(idEv, "", "", f.parse("00/00/00"), 0, "");
+        Event e = new Event(0 ,"", "", f.parse("00/00/00"), 0, "");
         ArrayList<Persoana> persEv = new ArrayList<>();
         for (Participare pa : this.getParticipare()) {
             if (pa.getIdEveniment() == idEv) {

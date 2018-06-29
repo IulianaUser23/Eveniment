@@ -26,7 +26,7 @@ public class ServiceEv {
 
     public void adaugareEveniment(int id, String titlu, String locatie, String data, int nrPersoane, String link) throws Exception {
         SimpleDateFormat f = new SimpleDateFormat("MM/dd/yy");
-        Event e = new Event(id, titlu, locatie, f.parse(data), nrPersoane, link);
+        Event e = new Event(id, titlu, locatie, f.parse(String.valueOf(data)), nrPersoane, link);
         this.repository.add(e);
         //retinem ce actiune s-a facut ca sa putem sa-i inversam efectul
         //Action a = new ActionAdd(e, this.irepo); //va lucra cu functiile din clasa ActionAdd
